@@ -30,15 +30,15 @@ class RegisterModel
             $mail->AuthType = 'PLAIN';
             $mail->SMTPAuth = true;
             //Correo de remitente (que sea hotmail)
-            $mail->Username = '****@hotmail.com';
+            $mail->Username = 'pregunta2.ok@hotmail.com';
             //Clave del correo
-            $mail->Password = '****';
+            $mail->Password = 'Programacionweb';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->Timeout = 30;
 
             //Nuevamente correo de remitente
-            $mail->setFrom('****@hotmail.com', "Pregunta2");
+            $mail->setFrom('pregunta2.ok@hotmail.com', "Pregunta2");
             $mail->addAddress($email, $nameComplete);
             $mail->Subject = 'Confirma tu cuenta... y empeza a responder!';
 
