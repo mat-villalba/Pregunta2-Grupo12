@@ -1,0 +1,89 @@
+<main class="py-5">
+    <div class="content container px-lg-5 p-4 bg-light rounded-3">
+        <h1 class="col-11 fw-bold display-5">Preguntas</h1>
+        <article class="mx-auto">
+            <br>
+            <div>
+                <form action="/admin/totalQuestions" method="post" enctype="multipart/form-data" class="row g-3">
+                    <div class="col-3 d-flex">
+                        <label for="finit" class="col-form-label">Fecha inicio</label>
+                        <input required type="date" id="finit" name="finit" class="form-control">
+                    </div>
+                    <div class="col-3 d-flex">
+                        <label for="fend" class="col-form-label">Fecha final</label>
+                        <input required type="date" id="fend" name="fend" class="form-control">
+                    </div>
+                    <div class="col-2 d-flex align-items-end">
+                        <input type="submit" value="Filtrar" class="btn btn-primary m-2">
+                    </div>
+                    <div class="col-4 d-flex align-items-end justify-content-end">
+                        <a href="/admin/totalQuestionsPdf" class="btn btn-primary m-1">
+                            <i class="fa-solid fa-file-arrow-down"></i> PDF
+                        </a>
+                    </div>
+                </form>
+                <br>
+                <div class="d-flex">
+                    <h4 class="col-10">Total encontradas: {{totalQuestions}}</h4>
+                </div>
+            </div>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Pregunta</th>
+                    <th>Opcion A</th>
+                    <th>Opcion B</th>
+                    <th>Opcion C</th>
+                    <th>Opcion D</th>
+                    <th>Correcta</th>
+                    <th>Creacion</th>
+                    <th>Mostrada</th>
+                    <th>Acertada(cant)</th>
+                    <th>Acertada(%)</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#allQuestions}}
+                    <tr>
+                        <td>{{descripcion}}</td>
+                        <td>{{opcionA}}</td>
+                        <td>{{opcionB}}</td>
+                        <td>{{opcionC}}</td>
+                        <td>{{opcionD}}</td>
+                        <td>{{resp_correcta}}</td>
+                        <td>{{fecha_creacion}}</td>
+                        <td>{{veces_mostrada}} veces</td>
+                        <td>{{veces_correcta}} veces</td>
+                        <td>{{porc_correc}} %</td>
+                    </tr>
+                {{/allQuestions}}
+            {{^allQuestions}}
+                {{#questions}}
+                    <p class="text-center fw-bold display-5"> No hay preguntas</p>
+                {{/questions}}
+            {{/allQuestions}}
+                </tbody>
+            </table>
+        </article>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="?pagina={{previous}}">Previous</a>
+                </li>
+                {{#paginas}}
+                    <li class="page-item">
+                        <a class="page-link {{#esActual}}active{{/esActual}}" href="?pagina={{numero}}">{{numero}}</a>
+                    </li>
+                {{/paginas}}
+                <li class="page-item">
+                    <a class="page-link" href="?pagina={{next}}">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="d-flex justify-content-center">
+            <br>
+            <a href="/lobby" class="btn btn-lg btn-primary m-3">Volver al lobby</a>
+        </div>
+    </div>
+</main>

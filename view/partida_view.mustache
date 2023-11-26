@@ -1,8 +1,36 @@
-<main class="py-5">
+<main id="contPartida" class="py-5">
     <div class="content container px-lg-5 p-4 bg-light rounded-3">
-        <h2 class="text-center display-3 fw-bold">Partida</h2>
+        {{#userPhoto}}
+            <img src="/public/imagenes/{{userPhoto}}" width="50px" class="rounded mx-auto d-block">
+        {{/userPhoto}}
+        {{^userPhoto}}
+            <img src="/public/imagenes/perfil.jpg" width="50px" class="rounded mx-auto d-block">
+        {{/userPhoto}}
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="myProgressBar"></div>
+        </div>
+        <div class="text-center">
+            <h5>Respondé antes de que se acabe el tiempo!</h5>
+            <div class="text-primary text-center text-primary fw-bold display-2" id="cronometro"></div>
+            <h5 id="questionCategory"></h5>
+            <h2 class="display-6 fw-bold" id="questionDescripcion"></h2>
+        </div>
+        <div class="text-center d-grid gap-2 col-6 mx-auto mt-4">
+            <button class="btn fw-bold btn-outline-primary btn-lg" id="opciona" type="button" name="optionSelected" value="A">A</button>
+            <button class="btn fw-bold btn-outline-primary btn-lg" id="opcionb" type="button" name="optionSelected" value="B">B</button>
+            <button class="btn fw-bold btn-outline-primary btn-lg" id="opcionc" type="button" name="optionSelected" value="C">C</button>
+            <button class="btn fw-bold btn-outline-primary btn-lg" id="opciond" type="button" name="optionSelected" value="D">D</button>
+            <p id="userCorrects" class="text-center"></p>
+            <form action="/partida/repportQuestion" method="post" id="form" enctype="multipart/form-data">
+                <input type="hidden" id="idQuestionHidden" name="idQuestion">
+            <button class="btn btn-outline-primary btn-sm"> Reportar</button>
+            </form>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
         <br>
-        <a href="/partida/newGame" class="btn btn-outline-primary btn-lg">¡Jugar!</a>
-        <a href="/ranking/" class="btn btn-outline-primary btn-lg">Ver ranking</a>
+        <a href="/lobby" class="btn btn-lg btn-primary m-3">Volver al lobby</a>
     </div>
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/public/js/partida.js"></script>

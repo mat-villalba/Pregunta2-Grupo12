@@ -1,0 +1,179 @@
+<main class="py-5">
+    <div class="content container px-lg-5 p-4 bg-light rounded-3">
+        <article class="mx-auto">
+            <br>
+            <div class="d-flex">
+                <h3 class="col-9">Preguntas
+                    {{#suggested}}sugeridas por {{/suggested}}
+                    {{#repport}}reportadas por {{/repport}}
+                    {{#edit}}aceptadas y disponibles en las partidas de los{{/edit}}
+                    jugadores</h3>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Pregunta</th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>Correcta</th>
+                    <th>Accion a realizar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Preguntas sugeridas -->
+                {{#questionsSuggested}}
+                    <tr>
+                        <td>{{descripcion}}</td>
+                        <td>{{opcionA}}</td>
+                        <td>{{opcionB}}</td>
+                        <td>{{opcionC}}</td>
+                        <td>{{opcionD}}</td>
+                        <td>{{resp_correcta}}</td>
+                        <td>
+
+                            <button id="{{id}}" type="submit" name="action" value="decline"
+                                    class="btn btn-primary deleteQuestion">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                            <form action="/EditQuestion" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="{{id}}">
+                            <button type="submit" name="action" value="edit" class="btn btn-primary">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            </form>
+                            <form action="/question/accept" method="post" enctype="multipart/form-data" >
+                                <input type="hidden" name="id" value="{{id}}">
+                                <button type="submit" name="action" value="accept" class="btn btn-primary">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {{/questionsSuggested}}
+                <!-- Preguntas reportadas -->
+                {{#questionsReported}}
+                    <tr>
+                        <td>{{descripcion}}</td>
+                        <td>{{opcionA}}</td>
+                        <td>{{opcionB}}</td>
+                        <td>{{opcionC}}</td>
+                        <td>{{opcionD}}</td>
+                        <td>{{resp_correcta}}</td>
+                        <td>
+
+                            <button id="{{id}}" type="submit" name="action" value="decline"
+                                    class="btn btn-primary deleteQuestion">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                            <form action="/EditQuestion" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="{{id}}">
+                            <button type="submit" name="action" value="edit" class="btn btn-primary">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            </form>
+
+                            <form action="/question/accept" method="post" enctype="multipart/form-data" >
+                                <input type="hidden" name="id" value="{{id}}">
+                            <button type="submit" name="action" value="accept" class="btn btn-primary">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
+                            </form>
+
+                        </td>
+                    </tr>
+                {{/questionsReported}}
+                <!-- Preguntas aceptadas y disponibles -->
+                {{#questionsAccepted}}
+                    <tr>
+                        <td>{{descripcion}}</td>
+                        <td>{{opcionA}}</td>
+                        <td>{{opcionB}}</td>
+                        <td>{{opcionC}}</td>
+                        <td>{{opcionD}}</td>
+                        <td>{{resp_correcta}}</td>
+                        <td>
+
+                            <button id="{{id}}" type="submit" name="action" value="decline"
+                                    class="btn btn-primary deleteQuestion">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                            <form action="/EditQuestion" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="{{id}}">
+                                <button type="submit" name="action" value="edit" class="btn btn-primary">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {{/questionsAccepted}}
+                </tbody>
+            </table>
+            <!-- Mensajes de ausencia de preguntas -->
+            {{^questionsSuggested}}
+                {{#suggested}}
+                    <p class="text-center fw-bold display-5"> No hay preguntas sugeridas en este momento</p>
+                {{/suggested}}
+            {{/questionsSuggested}}
+            {{^questionsReported}}
+                {{#repport}}
+                    <p class="text-center fw-bold display-5"> No hay preguntas reportadas en este momento</p>
+                {{/repport}}
+            {{/questionsReported}}
+            {{^questionsAccepted}}
+                {{#edit}}
+                    <p class="text-center fw-bold display-5"> No hay preguntas disponibles en partidas en este
+                        momento</p>
+                {{/edit}}
+            {{/questionsAccepted}}
+        </article>
+        <div class="d-flex justify-content-center">
+            <br>
+            <a href="/lobby" class="btn btn-lg btn-primary m-3">Volver al lobby</a>
+        </div>
+    </div>
+
+    <!--Modalees-->
+
+    <div class="modal" id="deleteModal">
+        <section class="modal-dialog">
+            <article class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dar de Baja</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form method="get" id="deleteForm">
+                    <div class="modal-body">
+                        <p>¿Estás seguro que deseas dar de baja esta pregunta?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </div>
+    <div class="modal" id="newQuestionModal">
+        <section class="modal-dialog">
+            <article class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Pregunta añadida correctamente</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </article>
+        </section>
+    </div>
+</main>
+<script src="/public/js/deleteModal.js"></script>
+{{#showNewQuestionModal}}
+    <script src="/public/js/lobbyNewQuestionModal.js"></script>
+{{/showNewQuestionModal}}

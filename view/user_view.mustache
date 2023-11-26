@@ -1,0 +1,194 @@
+<main class="py-5" id="main-content">
+    <div class="content container px-lg-5 p-4 bg-light rounded-3 ">
+        {{#userData}}
+            <article class="row g-3 ">
+                <h1 id="userName" class="text-center text-primary display-2 fw-bold">{{Nombre_usuario}}
+                    <img src="public/imagenes/{{nombrep}}.png" width="50px" alt="bandera pais">
+                </h1>
+                <br><br>
+                <section class="card p-3">
+                    <div class="row g-0">
+                        <div class="col-md-5 d-flex justify-content-center align-items-end">
+                                {{#Foto_perfil}}
+                                    <img src="/public/imagenes/{{Foto_perfil}}" class="imgPerfil m-0 rounded "
+                                         alt="Foto de perfil">
+                                {{/Foto_perfil}}
+                                {{^Foto_perfil}}
+                                    <img src="/public/imagenes/perfil.jpg" class="imgPerfil rounded" alt="Foto de perfil">
+                                {{/Foto_perfil}}
+                        </div>
+                            <div class="col-sm-12 col-md-4 card-body flex-column d-flex align-items-center ">
+                                {{#player}} <h2 class="card-title">Mejor puntaje: {{Puntaje_max}}</h2> {{/player}}
+                                <dl>
+                                    <dt>Correo</dt>
+                                    <dd>- {{Mail}}</dd>
+                                    <dt>Fecha de Nacimiento</dt>
+                                    <dd>- {{Fecha_nacimiento}}</dd>
+                                    <dt>Género</dt>
+                                    <dd>- {{Genero}}</dd>
+                                    <dt>Nombre completo</dt>
+                                    <dd>- {{Nombre_completo}}</dd>
+                                </dl>
+                            </div>
+                        <div class="col-sm-12 col-md-3 text-center">
+                            <img src="public/qr/{{Nombre_usuario}}.png" id="qr" alt="Código QR">
+                            <p class="fw-bold m-0 p-0">Compartí el perfil</p>
+                            {{#canEdit}}
+                                <br>
+                                <button type="button" class="btn btn-primary btn-content"
+                                        data-bs-toggle="modal" data-bs-target="#editAccountModal">
+                                    Editar cuenta
+                                </button>
+
+                                <div class="modal fade" id="editAccountModal" tabindex="-1"
+                                     aria-labelledby="editAccountModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editAccountModalLabel">Editar cuenta
+                                                    de {{userName}}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Cerrar"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/user/editCount" method="post"
+                                                      enctype="multipart/form-data" class="row g-3">
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-12">
+                                                            <label for="nombreCompleto" class="form-label">Nombre
+                                                                completo:</label>
+                                                            <input id="nombreCompleto" type="text" name="nombre"
+                                                                   class="form-control" value="{{Nombre_completo}}">
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label class="form-label">Genero:</label>
+                                                            <br>
+                                                            <div class="btn-group w-100">
+
+                                                                <input class="btn-check" type="radio" name="sexo"
+                                                                       id="{{Genero}}" value="{{Genero}}" required
+                                                                       checked>
+                                                                <label class="btn btn-outline-secondary"
+                                                                       for="masculino">No modificar</label>
+
+                                                                <input class="btn-check" type="radio" name="sexo"
+                                                                       id="masculino" value="Masculino" required>
+                                                                <label class="btn btn-outline-secondary"
+                                                                       for="masculino">Masculino</label>
+
+                                                                <input class="btn-check" type="radio" name="sexo"
+                                                                       id="femenino" value="Femenino" required>
+                                                                <label class="btn btn-outline-secondary" for="femenino">Femenino</label>
+
+                                                                <input class="btn-check" type="radio" name="sexo"
+                                                                       id="no-cargarlo" value="No especificar"
+                                                                       required>
+                                                                <label class="btn btn-outline-secondary"
+                                                                       for="no-cargarlo">No especificar</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <label for="FechaNacimiento" class="form-label">Fecha de
+                                                                nacimiento:</label>
+                                                            <input id="FechaNacimiento" type="date"
+                                                                   name="fecha_nacimiento" class="form-control"
+                                                                   min="1900-01-01"
+                                                                   max="2013-12-31" value="{{Fecha_nacimiento}}">
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <label for="pais" class="form-label">Nacionalidad:</label>
+                                                            <select id="pais" class="form-select" name="pais">
+                                                                <option value="{{idPais}}">{{nombrep}}</option>
+                                                                <option value="1">Argentina</option>
+                                                                <option value="2">Bolivia</option>
+                                                                <option value="3">Brasil</option>
+                                                                <option value="4">Colombia</option>
+                                                                <option value="5">Mexico</option>
+                                                                <option value="6">Paraguay</option>
+                                                                <option value="7">Peru</option>
+                                                                <option value="8">Uruguay</option>
+                                                                <option value="9">Venezuela</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <label class="form-label">Foto de perfil:</label>
+                                                            <input type="file" name="foto_perfil" class="form-control">
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <label class="form-check-label" for="eliminarFoto">Eliminar
+                                                                foto actual</label>
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   name="eliminar_foto" id="eliminarFoto">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <br>
+                                                        <div class="d-flex justify-content-between">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Cancelar
+                                                            </button>
+                                                            <input type="submit" value="Confirmar"
+                                                                   class="btn btn-primary">
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/canEdit}}
+                        </div>
+                    </div>
+                </section>
+            </article>
+            <br> <br>
+            <input type="hidden" name="lati" id="lati" value="{{lat}}">
+            <input type="hidden" name="long" id="long" value="{{lng}}">
+            <div class=" card p-3">
+                <h3>Ubicacion aproximada</h3>
+                <div id="mapUser" class="rounded" style="width:100%; height:50vh;"></div>
+            </div>
+
+            <br>
+            <br>
+            {{#player}}
+                <div class="mx-auto card p-3">
+                    <h3>Ultimas 50 partidas jugadas</h3>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id:</th>
+                            <th>Puntaje:</th>
+                            <th class="d-none d-sm-table-cell">Fecha y hora:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#games}}
+                            <tr>
+                                <td># {{id}}</td>
+                                <td>{{puntaje}} punto(s)</td>
+                                <td class="d-none d-sm-table-cell">{{fecha}}</td>
+                            </tr>
+                        {{/games}}
+                        </tbody>
+                    </table>
+                </div>
+
+            {{/player}}
+        {{/userData}}
+        <div class="d-flex justify-content-center">
+            <br>
+            <a href="/lobby" class="btn btn-lg btn-primary m-3">Volver al lobby</a>
+        </div>
+    </div>
+</main>
+
+<script src="/public/js/userMapApi.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiq3xISXSZYgkd9GDAOdajy4NK2d3L7dY"></script>

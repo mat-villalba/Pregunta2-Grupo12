@@ -2,70 +2,148 @@
 include_once('helpers/MySqlDatabase.php');
 include_once("helpers/MustacheRender.php");
 include_once('helpers/Router.php');
-include_once('helpers/Logger.php');
-include_once('helpers/SessionControl.php');
+include_once('helpers/SessionManager.php');
+include_once('helpers/RegistroService.php');
+include_once('helpers/UserService.php');
 
-include_once('controller/RegisterController.php');
-include_once('controller/LoginController.php');
-include_once('controller/PartidaController.php');
-include_once('controller/RankingController.php');
-include_once('controller/PerfilController.php');
-include_once('controller/LobbyController.php');
-
-include_once('model/RegisterModel.php');
-include_once('model/LoginModel.php');
-include_once('model/PartidaModel.php');
-include_once('model/RankingModel.php');
-include_once('model/PerfilModel.php');
+include_once("model/UserModel.php");
+include_once("model/HomeModel.php");
+include_once("model/RegistroModel.php");
 include_once("model/LobbyModel.php");
+include_once("model/RankingModel.php");
+include_once("model/PartidaModel.php");
+include_once('model/QuestionModel.php');
+include_once('model/AdminModel.php');
 
-include_once('helpers/RegisterService.php');
-include_once('helpers/LoginService.php');
-include_once('helpers/PartidaService.php');
-include_once('helpers/PerfilService.php');
+include_once('controller/UserController.php');
+include_once('controller/HomeController.php');
+include_once('controller/RegistroController.php');
+include_once('controller/LobbyController.php');
+include_once('controller/RankingController.php');
+include_once('controller/PartidaController.php');
+include_once('controller/QuestionController.php');
+include_once('controller/addQuestionController.php');
+include_once('controller/EditQuestionController.php');
+include_once('controller/AdminController.php');
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
+include_once('third-party/phpqrcode/qrlib.php');
 
-
-class Configuration {
+class Configuration
+{
     private $configFile = 'config/config.ini';
-
-    public function __construct() {
+    public function __construct()
+    {
     }
-
-    public function getSessionControl(){
-        return new SessionControl();
+    public function getRegistroController()
+    {
+        return new RegistroController(
+            $this->getRegistroModel(),
+            $this->getRenderer(),
+        $this->getRegistroService());
     }
-    public function getRegisterController() {
-        return new RegisterController( $this->getRegisterModel(), $this->getRegisterService(),$this->getRenderer());
+    public function getHomeController()
+    {
+        return new HomeController(
+            new HomeModel($this->getDatabase()),
+            $this->getRenderer(),
+            $this->getSessionManager());
     }
-    public function getLoginController() {
-        return new LoginController( $this->getLoginModel(), $this->getLoginService(),$this->getRenderer(),$this->getSessionControl());
+    public function getAddQuestionController(){
+        return new addQuestionController(
+            $this->getQuestionModel(),
+            $this->getRenderer(),
+            $this->getSessionManager());
     }
-
-    public function getPartidaController() {
-        return new PartidaController($this->getPartidaModel(), $this->getPartidaService(), $this->getRenderer());
-    }
-    public function getRankingController() {
-        return new RankingController( $this->getRankingModel(),$this->getRenderer());
+    public function getEditQuestionController(){
+        return new EditQuestionController(
+            $this->getQuestionModel(),
+            $this->getRenderer(),
+            $this->getSessionManager());
     }
     public function getLobbyController()
     {
         return new LobbyController(
             new LobbyModel($this->getDatabase()),
             $this->getRenderer(),
-            $this->getSessionControl());
+            $this->getSessionManager(),
+            $this->getUserService());
     }
+    public function getUserController()
+    {
+        return new UserController(
+            $this->getUserModel(),
+            $this->getRenderer(),
+            $this->getSessionManager(),
+        $this->getUserService());
+    }
+    public function getRankingController()
+    {
+        return new RankingController(
+            new RankingModel($this->getDatabase()),
+            $this->getRenderer(),
+            $this->getSessionManager());
+    }
+    public function getPartidaController()
+    {
+        return new PartidaController(
+            new PartidaModel($this->getDatabase()),
+            $this->getRenderer(),
+            $this->getSessionManager(),
+        $this->getUserService(),
 
-    private function getArrayConfig() {
+        );
+    }
+    public function getQuestionController()
+    {
+        return new QuestionController(
+            $this->getQuestionModel(),
+            $this->getRenderer(),
+            $this->getSessionManager());
+    }
+    public function getAdminController()
+    {
+        return new AdminController(
+            new AdminModel($this->getDatabase()),
+            $this->getRenderer(),
+            $this->getSessionManager());
+    }
+    public function getUserService()
+    {
+        return new UserService(
+            $this->getUserModel()
+        );
+    }
+    public function getRegistroService(){
+        return new RegistroService(
+            $this->getRegistroModel()
+        );
+    }
+    public function getQuestionModel()
+    {
+        return new QuestionModel($this->getDatabase());
+    }
+    public function getRegistroModel()
+    {
+        return new RegistroModel($this->getDatabase());
+    }
+    public function getUserModel(){
+        return new UserModel($this->getDatabase());
+    }
+    public function getSessionManager()
+    {
+        return new SessionManager();
+    }
+    private function getArrayConfig()
+    {
         return parse_ini_file($this->configFile);
     }
-
-    private function getRenderer() {
+    private function getRenderer()
+    {
         return new MustacheRender('view/partial');
     }
-
-    public function getDatabase() {
+    public function getDatabase()
+    {
         $config = $this->getArrayConfig();
         return new MySqlDatabase(
             $config['servername'],
@@ -73,55 +151,12 @@ class Configuration {
             $config['password'],
             $config['database']);
     }
-
-    public function getRouter() {
+    public function getRouter()
+    {
         return new Router(
             $this,
-            "getRegisterController",
-            "view");
-    }
-    public function getRegisterService() {
-        return new RegisterService(
-            $this->getRegisterModel()
-        );
-    }
-    public function getRegisterModel()
-    {
-        return new RegisterModel($this->getDatabase());
-    }
-    public function getLoginService() {
-        return new LoginService(
-            $this->getLoginModel()
-        );
-    }
-    public function getLoginModel()
-    {
-        return new LoginModel($this->getDatabase());
+            "getHomeController",
+            "home");
     }
 
-    public function getPartidaService() {
-        return new PartidaService(
-            $this->getPartidaModel()
-        );
-    }
-
-    public function getPartidaModel() {
-        return new PartidaModel($this->getDatabase());
-    }
-
-    public function getRankingModel() {
-        return new RankingModel($this->getDatabase());
-    }
-   
-    public function getPerfilController() {
-        return new PerfilController($this->getPerfilService(), $this->getRenderer());
-    }
-
-    public function getPerfilService() {
-        return new PerfilService($this->getPerfilModel());
-    }
-
-    public function getPerfilModel() {
-        return new PerfilModel($this->getDatabase());
-    }
 }

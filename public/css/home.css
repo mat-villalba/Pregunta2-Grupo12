@@ -1,0 +1,42 @@
+body {
+    background: rgb(131,58,180);
+    background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(40,231,197,1) 50%, rgba(49,140,231,1) 100%);
+    padding: 0;
+    margin: 0;
+}
+.content {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    min-height: calc(100vh - 19.5em);
+    align-items: center;
+    padding: 30px;
+    width: 90%;
+}
+footer {
+    min-height: 9.5em;
+}
+/*VISTA HOME*/
+.imgPregunton{
+    width: 70%;
+}
+/* VISTA USUARIO */
+.imgPerfil {
+    max-width: 100%;
+    width: 100%
+}
+.card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+#qr {
+    max-width: 70%;
+    width: 400px
+}
+/* Mapa oscuro*/
+#mapReg {
+    height: 100%;
+    width: 100%;
+}
+
+.dark-map {
+    background-color: #202020;
+}

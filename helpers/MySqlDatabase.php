@@ -1,9 +1,11 @@
 <?php
 
-class MySqlDatabase {
+class MySqlDatabase
+{
     private $connection;
 
-    public function __construct($serverName, $userName, $password, $databaseName) {
+    public function __construct($serverName, $userName, $password, $databaseName)
+    {
         $this->connection = mysqli_connect(
             $serverName,
             $userName,
@@ -15,22 +17,25 @@ class MySqlDatabase {
         }
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         mysqli_close($this->connection);
     }
 
-    public function query($sql) {
-        Logger::info('Ejecutando query: ' . $sql);
+    public function query($sql)
+    {
         $result = mysqli_query($this->connection, $sql);
         return mysqli_fetch_all($result, MYSQLI_BOTH);
     }
 
-    public function execute($sql) {
-        Logger::info('Ejecutando query: ' . $sql);
-        mysqli_query($this->connection, $sql);
+    public function print($sql)
+    {
+        $result = mysqli_query($this->connection, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    public function update($sql){
+    public function update($sql)
+    {
         $result = mysqli_query($this->connection, $sql);
     }
 
@@ -39,7 +44,8 @@ class MySqlDatabase {
         return mysqli_prepare($this->connection, $sql);
     }
 
-    public function uniqueQuery($sql){
+    public function singleQuery($sql)
+    {
         $result = mysqli_query($this->connection, $sql);
         return mysqli_fetch_assoc($result);
     }
