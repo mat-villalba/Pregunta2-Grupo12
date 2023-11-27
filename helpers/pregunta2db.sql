@@ -18,10 +18,10 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`id`, `descripcion`) VALUES
 (1, 'Conocimiento general'),
-(2, 'Programacion PHP'),
-(3, 'Base de datos'),
-(4, 'Programación Orientada a Objetos'),
-(5, 'Estilos en CSS');
+(2, 'Programacion'),
+(3, 'Moda'),
+(4, 'Ciencias'),
+(5, 'Geografia');
 
 -- --------------------------------------------------------
 
