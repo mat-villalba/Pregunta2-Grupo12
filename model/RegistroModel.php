@@ -37,7 +37,7 @@ class RegistroModel
             $mail->Port = 587;
 
 
-            $mail->setFrom('mattii2010@hotmail.com', 'Pregunta2');
+            $mail->setFrom('pregunta2.ok@hotmail.com', 'Pregunta2');
             $mail->addAddress($email, $nameComplete);
             $mail->Subject = 'Valida tu cuenta para empezar a jugar!';
 
