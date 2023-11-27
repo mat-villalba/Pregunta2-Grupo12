@@ -5,6 +5,7 @@ include_once('helpers/Router.php');
 include_once('helpers/SessionManager.php');
 include_once('helpers/RegistroService.php');
 include_once('helpers/UserService.php');
+include_once('helpers/PerfilService.php');
 
 include_once("model/UserModel.php");
 include_once("model/HomeModel.php");
@@ -14,6 +15,7 @@ include_once("model/RankingModel.php");
 include_once("model/PartidaModel.php");
 include_once('model/QuestionModel.php');
 include_once('model/AdminModel.php');
+include_once('model/PerfilModel.php');
 
 include_once('controller/UserController.php');
 include_once('controller/HomeController.php');
@@ -25,6 +27,7 @@ include_once('controller/QuestionController.php');
 include_once('controller/addQuestionController.php');
 include_once('controller/EditQuestionController.php');
 include_once('controller/AdminController.php');
+include_once('controller/PerfilController.php');
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once('third-party/phpqrcode/qrlib.php');
@@ -157,6 +160,17 @@ class Configuration
             $this,
             "getHomeController",
             "home");
+    }
+    public function getPerfilController() {
+        return new PerfilController($this->getPerfilService(), $this->getRenderer());
+    }
+
+    public function getPerfilService() {
+        return new PerfilService($this->getPerfilModel());
+    }
+
+    public function getPerfilModel() {
+        return new PerfilModel($this->getDatabase());
     }
 
 }
