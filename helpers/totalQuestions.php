@@ -8,7 +8,7 @@ class PDF extends fpdf
     // Cabecera de página
     function Header()
     {
-        $this->Image('third-party/fpdf/logo2.png', 110, 5, 80); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
+        $this->Image('third-party/fpdf/logo2.png', 200, 2, 30); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
         $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
         $this->Cell(45); // Movernos a la derecha
         $this->SetTextColor(0, 0, 0); //color
@@ -16,7 +16,7 @@ class PDF extends fpdf
 
         /* TITULO DE LA TABLA */
         //color
-        $this->SetTextColor(228, 100, 0);
+        $this->SetTextColor(0, 0, 255);
         $this->Cell(50); // mover a la derecha
         $this->SetFont('Arial', 'B', 15);
         $this->Cell(190, 10, utf8_decode("REPORTE DE PREGUNTAS "), 0, 1, 'C', 0);
@@ -24,7 +24,7 @@ class PDF extends fpdf
 
         /* CAMPOS DE LA TABLA */
         //color
-        $this->SetFillColor(228, 100, 0); //colorFondo
+        $this->SetFillColor(0, 0, 255); //colorFondo
         $this->SetTextColor(255, 255, 255); //colorTexto
         $this->SetDrawColor(163, 163, 163); //colorBorde
         $this->SetFont('Arial', 'B', 8);

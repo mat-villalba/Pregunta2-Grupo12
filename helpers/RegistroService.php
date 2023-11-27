@@ -30,7 +30,7 @@ class RegistroService
             return "Las contraseñas no coinciden. Intentá nuevamente.";
         } else {
             if (!$this->createAccount($pass, $nameComplete, $birth, $sex, $country, $lat, $lng, $mail, $nameUser, $photo)) {
-                return "El usuario ya está registrado. Prueba con otro nombre o un correo electrónico diferente.";
+                return "El usuario ya está registrado.";
             } else {
                 return true;
             }

@@ -69,13 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
 $(document).ready(function () {
     let remainingTime;
     if (sessionStorage.getItem('gameStarted')) {
-        // La partida ya ha comenzado, restaurar el estado actual
         countCorrect = parseInt(sessionStorage.getItem('countCorrect'));
         setQuestionData(JSON.parse(sessionStorage.getItem('currentQuestion')), countCorrect);
         currentWidth = parseInt(sessionStorage.getItem('currentWidth'));
         remainingTime = parseInt(sessionStorage.getItem('remainingTime'));
         if (currentWidth < finalWidth && remainingTime > 0) {
-            resetProgressBar(remainingTime); // Establecer el tiempo restante antes de iniciar la animación
+            resetProgressBar(remainingTime); 
         }
     } else {
         loadNewQuestion();
@@ -123,7 +122,7 @@ function handleTimeout() {
     $.ajax({
         url: 'http://localhost/partida/checkAnswer',
         method: 'POST',
-        data: {'optionSelected': 'D'}, // Opción incorrecta predefinida para cuando se agota el tiempo
+        data: {'optionSelected': 'D'}, 
         dataType: 'json'
     }).done(function (response) {
         if (response.success) {
@@ -174,8 +173,8 @@ function resetProgressBar(remainingTime) {
     clearInterval(progressInterval);
     currentWidth = 0;
     startTime = null;
-    duration = remainingTime; // Establecer la duración de la animación al tiempo restante
-    incrementWidth = (finalWidth / duration) * 100; // Recalcular el incremento de ancho
+    duration = remainingTime; 
+    incrementWidth = (finalWidth / duration) * 100;
     progressInterval = setInterval(animateProgressBar, 100);
 }
 function animateProgressBar() {
@@ -197,13 +196,13 @@ function animateProgressBar() {
 }
 function updateProgressBarColors(remainingTime) {
     if (remainingTime < 6000 && remainingTime > 3000) {
-        setProgressBarColors('#FF9C02', '#FF9C02');
+        setProgressBarColors('#ffc919', '#ffc919');
     } else if (remainingTime < 3000 && remainingTime > 1000) {
-        setProgressBarColors('#FF0000', '#FF0000');
+        setProgressBarColors('#fa8500', '#fa8500');
     } else if (remainingTime < 1000) {
-        setProgressBarColors('#880000', '#880015');
+        setProgressBarColors('#df0000', '#df0000');
     } else {
-        setProgressBarColors('', '');
+        setProgressBarColors('#00b900', '#00b900');
     }
 }
 function setProgressBarColors(cronometroColor, progressBarColor) {

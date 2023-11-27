@@ -1,15 +1,15 @@
 <main class="py-5">
-    <div class="content container px-lg-5 p-4 bg-light rounded-3">
+    <div class="content container px-lg-5 p-4  rounded-3">
         <article class="mx-auto">
             <br>
             <div class="d-flex">
                 <h3 class="col-9">Preguntas
                     {{#suggested}}sugeridas por {{/suggested}}
                     {{#repport}}reportadas por {{/repport}}
-                    {{#edit}}aceptadas y disponibles en las partidas de los{{/edit}}
+                    {{#edit}}aceptadas{{/edit}}
                     jugadores</h3>
             </div>
-            <table class="table table-striped">
+            <table class="tablaPreguntas table table-hover">
                 <thead>
                 <tr>
                     <th>Pregunta</th>
@@ -18,11 +18,11 @@
                     <th>C</th>
                     <th>D</th>
                     <th>Correcta</th>
-                    <th>Accion a realizar</th>
+                    <th>Tarea</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Preguntas sugeridas -->
+            
                 {{#questionsSuggested}}
                     <tr>
                         <td>{{descripcion}}</td>
@@ -33,27 +33,31 @@
                         <td>{{resp_correcta}}</td>
                         <td>
 
-                            <button id="{{id}}" type="submit" name="action" value="decline"
-                                    class="btn btn-primary deleteQuestion">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
+<div class="button-container">
+    <button id="{{id}}" type="submit" name="action" value="decline" class="btn btn-danger deleteQuestion">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
 
-                            <form action="/EditQuestion" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="{{id}}">
-                            <button type="submit" name="action" value="edit" class="btn btn-primary">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-                            </form>
-                            <form action="/question/accept" method="post" enctype="multipart/form-data" >
-                                <input type="hidden" name="id" value="{{id}}">
-                                <button type="submit" name="action" value="accept" class="btn btn-primary">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </button>
+    <form action="/EditQuestion" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{id}}">
+        <button type="submit" name="action" value="edit" class="btn btn-warning">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </button>
+    </form>
+
+    <form action="/question/accept" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{id}}">
+        <button type="submit" name="action" value="accept" class="btn btn-success">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+    </form>
+</div>
+
                             </form>
                         </td>
                     </tr>
                 {{/questionsSuggested}}
-                <!-- Preguntas reportadas -->
+            
                 {{#questionsReported}}
                     <tr>
                         <td>{{descripcion}}</td>
@@ -64,29 +68,31 @@
                         <td>{{resp_correcta}}</td>
                         <td>
 
-                            <button id="{{id}}" type="submit" name="action" value="decline"
-                                    class="btn btn-primary deleteQuestion">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
+ <div class="button-container">
+    <button id="{{id}}" type="submit" name="action" value="decline" class="btn btn-danger deleteQuestion">
+        <i class="fa-regular fa-trash-can"></i>
+    </button>
 
-                            <form action="/EditQuestion" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="{{id}}">
-                            <button type="submit" name="action" value="edit" class="btn btn-primary">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-                            </form>
+    <form action="/EditQuestion" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{id}}">
+        <button type="submit" name="action" value="edit" class="btn btn-warning">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </button>
+    </form>
 
-                            <form action="/question/accept" method="post" enctype="multipart/form-data" >
-                                <input type="hidden" name="id" value="{{id}}">
-                            <button type="submit" name="action" value="accept" class="btn btn-primary">
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                            </button>
-                            </form>
+    <form action="/question/accept" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{id}}">
+        <button type="submit" name="action" value="accept" class="btn btn-success">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+    </form>
+</div>
+
 
                         </td>
                     </tr>
                 {{/questionsReported}}
-                <!-- Preguntas aceptadas y disponibles -->
+            
                 {{#questionsAccepted}}
                     <tr>
                         <td>{{descripcion}}</td>
@@ -97,36 +103,37 @@
                         <td>{{resp_correcta}}</td>
                         <td>
 
-                            <button id="{{id}}" type="submit" name="action" value="decline"
-                                    class="btn btn-primary deleteQuestion">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                            <form action="/EditQuestion" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="{{id}}">
-                                <button type="submit" name="action" value="edit" class="btn btn-primary">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </button>
-                            </form>
+ <div class="btn-group" role="group">
+    <button id="{{id}}" type="submit" name="action" value="decline" class="btn btn-danger deleteQuestion">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </button>
+
+    <form action="/EditQuestion" method="post" enctype="multipart/form-data" class="d-inline-block">
+        <input type="hidden" name="id" value="{{id}}">
+        <button type="submit" name="action" value="edit" class="btn btn-warning" style="margin-left: 10px;">
+            <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+    </form>
+</div>
                         </td>
                     </tr>
                 {{/questionsAccepted}}
                 </tbody>
             </table>
-            <!-- Mensajes de ausencia de preguntas -->
+          
             {{^questionsSuggested}}
                 {{#suggested}}
-                    <p class="text-center fw-bold display-5"> No hay preguntas sugeridas en este momento</p>
+                    <p class="text-center fw-bold display-5"> No hay preguntas aun</p>
                 {{/suggested}}
             {{/questionsSuggested}}
             {{^questionsReported}}
                 {{#repport}}
-                    <p class="text-center fw-bold display-5"> No hay preguntas reportadas en este momento</p>
+                    <p class="text-center fw-bold display-5"> No hay preguntas reportadas aun</p>
                 {{/repport}}
             {{/questionsReported}}
             {{^questionsAccepted}}
                 {{#edit}}
-                    <p class="text-center fw-bold display-5"> No hay preguntas disponibles en partidas en este
-                        momento</p>
+                    <p class="text-center fw-bold display-5"> No hay preguntas aceptadas disponibles aun</p>
                 {{/edit}}
             {{/questionsAccepted}}
         </article>
@@ -147,11 +154,11 @@
                 </div>
                 <form method="get" id="deleteForm">
                     <div class="modal-body">
-                        <p>¿Estás seguro que deseas dar de baja esta pregunta?</p>
+                        <p>¿Confirmas que quieres dar de baja esta pregunta?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Confirmar</button>
                     </div>
                 </form>
             </article>
@@ -164,7 +171,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Pregunta añadida correctamente</p>
+                    <p>Pregunta agregada correctamente</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>

@@ -1,56 +1,69 @@
 <main class="py-5">
-    <div class="content container px-lg-5 p-4 bg-light rounded-3">
+    <div class="content container px-lg-5 p-4 rounded-3">
         {{#player}}
-            <h1 class="text-center text-primary display-2 fw-bold">{{userName}}, sugerí una pregunta</h1>
+<h1 class="text-center text-success display-1 fw-bold " >
+    <img class="imgPregunta3" src="/public/imagenes/Ciencia.png" alt="logoPregunta3">{{userName}}, sugiere una pregunta
+</h1>
+
             <br>
-            <h4 class="text-center fw-bold">Si tu pregunta es interesante y no se encuentra en el juego, será aprobada
-                en las proximas 48hs hábiles</h4>
+            <h4 class="text-center fw-bold">Nuestros editores aprobaran tu pregunta si cumple nuestras condiciones dentro de los proximos 3 dias</h4>
             <br>
         {{/player}}
         {{#edit}}
             {{#errorQuestion}}
-                <h2 class="alert alert-danger display-2 fw-bold"> No se pudo agregar la pregunta, porque ya existe.</h2>
+                <h2 class="alert alert-danger display-2 fw-bold"> La pregunta ya existe.</h2>
             {{/errorQuestion}}
             <h1 class="text-center text-primary display-2 fw-bold">{{userName}}, creá la pregunta</h1>
             <br>
-            <h4 class="text-center fw-bold">La pregunta será aprobada automáticamente y pasará a formar parte de las
-                partidas.</h4>
+            <h4 class="text-center fw-bold">La pregunta será aprobada por nuestros editores y sera parte del juego una vez aprobada.</h4>
             <br>
         {{/edit}}
         <form action="/addQuestion/addQuestion" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <div class="form-group">
+                    <div class="form-addCuestion">
                         <label>Pregunta</label>
-                        <input required name="descripcion" class="form-control" placeholder="Por ejemplo.. ¿Cómo se llama el mejor juego de trivia?">
+                        <input required name="descripcion" class="form-control" placeholder="Por ejemplo...¿Cuantos años tiene la Unlam?">
                     </div>
-                    <div class="form-group">
+                    <div class="form-addCuestion">
                         <label>Respuesta A</label>
+<<<<<<< Updated upstream
                         <input required name="opcionA" class="form-control" placeholder="Pregunta2">
+=======
+                        <input required name="opcionA" class="form-control" placeholder="Pregunta1">
+>>>>>>> Stashed changes
                     </div>
-                    <div class="form-group">
+                    <div class="form-addCuestion">
                         <label>Respuesta B</label>
-                        <input required name="opcionB" class="form-control" placeholder="Preguntitas">
+                        <input required name="opcionB" class="form-control" placeholder="Pregunta2">
                     </div>
-                    <div class="form-group">
+                    <div class="form-addCuestion">
                         <label>Respuesta C</label>
+<<<<<<< Updated upstream
                         <input required name="opcionC" class="form-control" placeholder="Yo soy pregunta2">
+=======
+                        <input required name="opcionC" class="form-control" placeholder="Pregunta3">
+>>>>>>> Stashed changes
                     </div>
-                    <div class="form-group">
+                    <div class="form-addCuestion">
                         <label>Respuesta D</label>
+<<<<<<< Updated upstream
                         <input required name="opcionD" class="form-control" placeholder="Pregunta2bis">
+=======
+                        <input required name="opcionD" class="form-control" placeholder="Pregunta4">
+>>>>>>> Stashed changes
                     </div>
-                    <div class="form-group">
+                    <div class="form-addCuestion">
                         <label>Categoria</label>
                         <select name="idCategoria" class="form-control" required>
                             <option value="1">Conocimiento general</option>
-                            <option value="2">Programación PHP</option>
-                            <option value="3">Base de datos</option>
-                            <option value="4">Programación Orientada a Objetos</option>
-                            <option value="5">Estilos en CSS</option>
+                            <option value="2">Programación</option>
+                            <option value="3">Moda</option>
+                            <option value="4">Ciencias</option>
+                            <option value="5">Geografia</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-addCuestion">
                         <label>Respuesta correcta</label>
                         <select name="respuestaCorrecta" class="form-control" required>
                             <option value="A">A</option>
@@ -61,8 +74,8 @@
                     </div>
                     <div class="d-flex justify-content-center">
                         <br>
-                        <a href="/lobby" class="btn btn-primary m-3">Volver</a>
-                        <button type="submit" class="btn btn-primary m-3">Crear pregunta</button>
+                        <a href="/lobby" class="btn btn-success m-3">Volver</a>
+                        <button type="submit" class="btn btn-success m-3">Crear pregunta</button>
                     </div>
                 </div>
             </div>
@@ -73,13 +86,13 @@
         <section class="modal-dialog">
             <article class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Pregunta añadida correctamente</p>
+                    <p>Pregunta agregada a sugerencias correctamente</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </article>
         </section>

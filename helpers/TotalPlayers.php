@@ -12,7 +12,7 @@ class PDF extends fpdf
 
         //$consulta_info = $conexion->query(" select *from hotel ");//traemos datos de la empresa desde BD
         //$dato_info = $consulta_info->fetch_object();
-        $this->Image('third-party/fpdf/logo2.png', 108, 5, 80); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
+        $this->Image('third-party/fpdf/logo2.png', 200, 2, 30); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
         $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
         $this->Cell(45); // Movernos a la derecha
         $this->SetTextColor(0, 0, 0); //color
@@ -20,7 +20,7 @@ class PDF extends fpdf
 
         /* TITULO DE LA TABLA */
         //color
-        $this->SetTextColor(228, 100, 0);
+        $this->SetTextColor(0, 0, 255);
         $this->Cell(50); // mover a la derecha
         $this->SetFont('Arial', 'B', 15);
         $this->Cell(180, 10, utf8_decode("REPORTE DE JUGADORES "), 0, 1, 'C', 0);
@@ -28,9 +28,9 @@ class PDF extends fpdf
 
         /* CAMPOS DE LA TABLA */
         //color
-        $this->SetFillColor(228, 100, 0); //colorFondo
+        $this->SetFillColor(0, 0, 255); //colorFondo
         $this->SetTextColor(255, 255, 255); //colorTexto
-        $this->SetDrawColor(163, 163, 163); //colorBorde
+        $this->SetDrawColor(0, 0, 255); //colorBorde
         $this->SetFont('Arial', 'B', 9);
         $this->Cell(20, 10, utf8_decode('Id'), 1, 0, 'C', 1);
         $this->Cell(50,10, utf8_decode('Nombre de Usuario'), 1, 0, 'C', 1);
@@ -38,7 +38,6 @@ class PDF extends fpdf
         $this->Cell(30, 10, utf8_decode('Género'), 1, 0, 'C', 1);
         $this->Cell(35, 10, utf8_decode('Fecha de Nac.'), 1, 0, 'C', 1);
         $this->Cell(35, 10, utf8_decode('Fecha Registro'), 1, 0, 'C', 1);
-        $this->Cell(35, 10, utf8_decode('Respuestas Correctas'), 1, 0, 'C', 1);
         $this->Ln();
     }
 

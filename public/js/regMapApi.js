@@ -3,7 +3,7 @@ function loadMap() {
         center: new google.maps.LatLng(-34.6686986, -58.5614947),
         zoom: 8,
         mapTypeControl: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
         styles: [
             {
                 featureType: "all",

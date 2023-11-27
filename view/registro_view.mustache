@@ -1,9 +1,9 @@
 <main class="py-5">
-    <div class="content container px-lg-5 p-4 bg-light rounded-3">
-        <h2 class="text-center display-3 fw-bold">¡Creá tu cuenta y divertite jugando!</h2>
+    <div class="content container px-lg-5 p-4 rounded-3">
+        <h2 class="text-center display-3 fw-bold">Crea tu perfil y comienza a divertirte</h2>
         <br>
         <form action="/registro/newAccount" method="post" enctype="multipart/form-data" class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-6 mx-auto">
                 <div class="col-md-12">
                     <label for="nombreCompleto" class="form-label">Nombre completo:</label>
                     <input id="nombreCompleto" type="text" name="nombre" class="form-control" required placeholder="Ingresar nombre">
@@ -78,14 +78,14 @@
 
             </div>
 
-            <div class="col-md-6">
-                <div class="col-md-12" style="height: 95%">
-                    <label class="form-label">Selecciona tu ubicacion en el mapa haciendo click en él:</label>
-                    <div id="mapReg" class="w-100 h-100 dark-map"></div>
-                    <input type="hidden" name="lat" id="lat" value="">
-                    <input type="hidden" name="lng" id="lng" value="">
-                </div>
-            </div>
+          <div class="content container px-lg-5 p-4 rounded-3">
+        <div class="col-md-12" style="height: 400px;">
+            <label class="form-label">Selecciona tu ubicacion en el mapa haciendo click en él:</label>
+            <div id="mapReg" class="w-100 h-100 dark-map"></div>
+            <input type="hidden" name="lat" id="lat" value="">
+            <input type="hidden" name="lng" id="lng" value="">
+        </div>
+    </div>
             <div class="col-12">
                 <br>
                 <div class="d-flex justify-content-between">
@@ -103,11 +103,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="/public/imagenes/brain2.png" width="400px" class="mx-auto d-block display-5" alt="">
+                    <img src="/public/imagenes/logo2.gif" width="200px" class="mx-auto d-block display-5" alt="">
                     <p>Lo sentimos, {{message}}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Aceptar</button>
                 </div>
             </article>
         </section>

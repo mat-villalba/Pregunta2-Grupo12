@@ -39,7 +39,7 @@ class LobbyController
         $reportModalData = $this->sessionManager->get('report');
         $lostModalData = $this->sessionManager->get('lost');
 
-        $data['welcome'] = $this->getWelcome($genre);
+        $data['welcome'] = $this->getWelcome();
         $data['games'] = $this->lobbyModel->getFiveUserGames($userName);
         $data['puntaje_max'] = $this->userService->getUserMaxScoreByName($userName);
         $data['userName'] = $userName;
@@ -70,14 +70,9 @@ class LobbyController
         return $data;
     }
 
-    private function getWelcome($genre)
+    private function getWelcome()
     {
-        $rt = 'Bienvenidx';
-        if ($genre === 'Femenino') {
-            $rt = 'Bienvenida';
-        } elseif ($genre === 'Masculino') {
-            $rt = 'Bienvenido';
-        }
+        $rt = 'Hola';
         return $rt;
     }
 

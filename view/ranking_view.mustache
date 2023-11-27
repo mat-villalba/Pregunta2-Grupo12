@@ -1,24 +1,27 @@
 <main class="py-5">
-    <div class="content container px-lg-5 p-4 bg-light rounded-3 ">
-        <h1 class="text-center text-primary display-2 fw-bold">Clasificación</h1>
-        <br>
+    <div class="content container px-lg-5 p-4 rounded-3 text-center">
+        <div class="d-flex justify-content-center align-items-center mb-4">
+            <!-- Contenedor para alinear elementos horizontalmente y centrar verticalmente -->
+            <img width="300px" class="imgmundogif me-3" src="/public/imagenes/mundo.gif" alt="logomundogif">
+            <h1 class="rankingView text-primary display-2 fw-bold ">Ranking </h1>
+        </div>
         <div>
-            <table class="table table-striped">
+            <table class="table table-dark table-hover">
                 <thead>
-                <tr>
-                    <th>Jugador</th>
-                    <th>Puntaje</th>
-                    <th>Posicion</th>
-                </tr>
+                    <tr>
+                        <th>Jugador</th>
+                        <th>Puntaje</th>
+                        <th>Posicion</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {{#users}}
-                    <tr>
-                        <td><a href="user&name={{Nombre_usuario}}">{{Nombre_usuario}}</a></td>
-                        <td>{{Puntaje_max}}</td>
-                        <td>#{{Posicion}}</td>
-                    </tr>
-                {{/users}}
+                    {{#users}}
+                        <tr>
+                            <td><a href="user&name={{Nombre_usuario}}">{{Nombre_usuario}}</a></td>
+                            <td>{{Puntaje_max}}</td>
+                            <td>#{{Posicion}}</td>
+                        </tr>
+                    {{/users}}
                 </tbody>
             </table>
         </div>
@@ -28,3 +31,6 @@
         </div>
     </div>
 </main>
+
+
+

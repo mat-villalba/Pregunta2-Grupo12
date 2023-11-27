@@ -1,13 +1,13 @@
 <main class="py-5">
-    <div class="content container px-lg-5 p-4 bg-light rounded-3">
-        <h1 class="text-center text-primary display-2 fw-bold">¡{{welcome}} {{userName}}!</h1>
+    <div class="content container px-lg-5 p-4  rounded-3">
+        <h1 class="admin text-center display-2 fw-bold">¡{{welcome}} {{userName}}!</h1>
         <h2 class="text-center">
-            ¿Qué necesita consultar hoy?
+           Ver
         </h2>
         <article class="d-grid gap-2 col-6 mx-auto mt-4">
-            <button type="button"  class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#filterModalUser">Usuarios</button>
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#filterModalGames">Partidas</button>
-            <button type="button"  class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#filterModalQuestions">Preguntas</button>
+            <button type="button"  class="admin btn  btn-lg" data-bs-toggle="modal" data-bs-target="#filterModalUser">Usuarios</button>
+            <button type="button" class="admin btn btn-lg" data-bs-toggle="modal" data-bs-target="#filterModalGames">Partidas</button>
+            <button type="button"  class="admin btn  btn-lg" data-bs-toggle="modal" data-bs-target="#filterModalQuestions">Preguntas</button>
         </article>
     </div>
 
@@ -15,21 +15,21 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filterModalLabel">Filtrar por fecha</h5>
+                    <h5 class="modal-title" id="filterModalLabel">Filtrar usuarios por fecha de alta</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="/admin/totalUser" method="post" enctype="multipart/form-data" class="row g-3">
-                        <label for="finit">Fecha inicio</label>
+                        <label for="finit">Desde</label>
                         <input required type="date" id="finit" name="finit" value="2023-01-01">
-                        <label for="fend">Fecha final</label>
+                        <label for="fend">Hasta</label>
                         <input required type="date" id="fend" name="fend" value="2023-12-12">
                 </div>
                 <div class="col-12">
                     <br>
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Cancelar</button>
-                        <input type="submit" value="Confirmar" class="btn btn-primary m-2">
+                        <button type="button" class="btn btn-primary m-2" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="submit" value="Confirmar" class="btn btn-success m-2">
                     </div>
                 </div>
                 </form>
@@ -46,9 +46,9 @@
                 </div>
                 <div class="modal-body">
                     <form action="/admin/totalGames" method="post" enctype="multipart/form-data" class="row g-3">
-                        <label for="finit">Fecha inicio</label>
+                        <label for="finit">Desde</label>
                         <input required type="date" id="finit" name="finit" value="2023-01-01">
-                        <label for="fend">Fecha final</label>
+                        <label for="fend">Hasta</label>
                         <input required type="date" id="fend" name="fend" value="2023-12-12">
                 </div>
                 <div class="col-12">
@@ -72,9 +72,9 @@
                 </div>
                 <div class="modal-body">
                     <form action="/admin/totalQuestions" method="post" enctype="multipart/form-data" class="row g-3">
-                        <label for="finit">Fecha inicio</label>
+                        <label for="finit">Desde</label>
                         <input required type="date" id="finit" name="finit" value="2023-01-01">
-                        <label for="fend">Fecha final</label>
+                        <label for="fend">Hasta</label>
                         <input required type="date" id="fend" name="fend" value="2023-12-12">
                 </div>
                 <div class="col-12">

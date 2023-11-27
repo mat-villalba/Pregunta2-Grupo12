@@ -18,7 +18,7 @@ class UserController
     public function home()
     {
         if (isset($_GET['name'])) {
-            $userName = $_GET['name']; // Lo recibe de la view ranking Linea 18
+            $userName = $_GET['name']; 
         }
         $userLogged = $this->sessionManager->get("userName");
         $canEdit = (strtoupper($userName)) === (strtoupper($userLogged));

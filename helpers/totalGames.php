@@ -12,7 +12,18 @@ class PDF extends fpdf
 
         //$consulta_info = $conexion->query(" select *from hotel ");//traemos datos de la empresa desde BD
         //$dato_info = $consulta_info->fetch_object();
-        $this->Image('third-party/fpdf/logo2.png', 66, 5, 80); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
+
+
+        $anchoPagina = $this->GetPageWidth();
+
+     
+        $anchoImagen = 30; 
+        
+      
+        $posicionHorizontal = ($anchoPagina - $anchoImagen) / 2;
+        
+      
+        $this->Image('third-party/fpdf/logo2.png', $posicionHorizontal, 0, $anchoImagen);
         $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
         $this->Cell(45); // Movernos a la derecha
         $this->SetTextColor(0, 0, 0); //color
@@ -20,15 +31,15 @@ class PDF extends fpdf
 
         /* TITULO DE LA TABLA */
         //color
-        $this->SetTextColor(228, 100, 0);
+        $this->SetTextColor(0, 0, 255);
         $this->Cell(50); // mover a la derecha
         $this->SetFont('Arial', 'B', 15);
-        $this->Cell(100, 10, utf8_decode("REPORTE DE PARTIDAS "), 0, 1, 'C', 0);
+        $this->Cell(100, 10, utf8_decode("REPORTE DE PARTIDAS JUGADAS"), 0, 1, 'C', 0);
         $this->Ln(4);
 
         /* CAMPOS DE LA TABLA */
         //color
-        $this->SetFillColor(228, 100, 0); //colorFondo
+        $this->SetFillColor(0, 0, 255); //colorFondo
         $this->SetTextColor(255, 255, 255); //colorTexto
         $this->SetDrawColor(163, 163, 163); //colorBorde
         $this->SetFont('Arial', 'B', 11);

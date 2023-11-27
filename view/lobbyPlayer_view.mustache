@@ -1,20 +1,25 @@
 <main class="py-5">
-<div class="content container px-lg-5 p-4 bg-light rounded-3">
-    <h1 class="text-center text-primary display-2 fw-bold">¡{{welcome}} {{userName}}!</h1>
-    <h2 class="text-center">Mejor puntaje: {{puntaje_max}}</h2>
+<div class="content container px-lg-5 p-4  rounded-3">
+ 
+    <h1 class="text-center display-3 fw-bold saludo">¡{{welcome}} {{userName}}!</h1>
+     <h1 class="p-1 text-center"><img class="imgPregunta2gif" src="/public/imagenes/logo2.gif" alt="logoPregunta2gif"></h1>
+    <h2 class="text-center">Tu maximo puntaje es: {{puntaje_max}}</h2>
     <article class="d-grid gap-2 col-6 mx-auto mt-4">
-        <a href="/partida" class="btn btn-primary btn-lg">Nueva partida</a>
-        <a href="/ranking" class="btn btn-outline-primary btn-lg">Ver clasificación</a>
-        <a href="/addQuestion" class="btn btn-outline-primary btn-lg">Sugerir preguntas</a>
+        <a href="/partida" class="btn btn-primary1 btn-lg">Nueva partida</a>
+        <a href="/ranking" class="btn btn-outline-primary1 btn-lg">Ver ranking de jugadores</a>
+        <a href="/addQuestion" class="btn btn-outline-primary1 btn-lg">Sugerir preguntas</a>
     </article>
         <article class="mx-auto">
             <br>
-            <h3>Ultimas 5 partidas jugadas</h3>
-            <table class="table table-striped">
+            <h3>Tus ultimas partidas</h3>
+
+   <button class="botonPuntaje" id="toggleTablaBtn">Mostrar/Esconder Tabla</button>
+
+            <table class="table table-dark table-hover tabla-container tabla-expandida" id="tablaContainer">
                 <thead>
                 <tr>
-                    <th>Id:</th>
-                    <th>Puntaje:</th>
+                    <th>Id Partida:</th>
+                    <th>Score:</th>
                     <th>Fecha y hora:</th>
                 </tr>
                 </thead>
@@ -32,19 +37,19 @@
             <section class="modal-dialog">
                 <article class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Partida finalizada</h4>
+                        <h4 class="modal-title">Partida terminada</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body text-center">
-                        <h5 class="fw-bold">¡Perdiste!</h5>
-                        <h5>{{question}}</h5>
-                        <p>La respuesta correcta es</p>
-                        <h5 class="fw-bold">{{correctAnswer}}</h5>
+                        <h5 class="fw-bold">¡Vuelve a intentarlo!</h5>
+                        <h5 class="fw-bold">{{question}}</h5>
+                        <p>La respuesta correcta era: </p>
+                        <h5 class="fw-bold text-danger">{{correctAnswer}}</h5>
                         <p>Tu puntaje</p>
                         <h5 class="fw-bold">{{userCorrects}}</h5>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </article>
             </section>
@@ -57,10 +62,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <h5 class="fw-bold">¡Lamentamos el error!</h5>
-                    <p>La pregunta fue reportada y no aparecerá en las proximas partidas hasta que podamos evaluar el problema.</p>
-                    <p>Muchas gracias por comprender.</p>
-                    <p>Tu puntaje</p>
+                    <h5 class="fw-bold">¡Lamentamos el inconveniente!</h5>
+                    <p>La pregunta sera revisada por nuestros editores y no sera mostrada hasta que termine el proceso de evaluacion</p>
+                    <p>Muchas gracias por tu ayuda.</p>
+                    <p>Tu puntaje:</p>
                     {{#userCorrects}}
                     <h5 class="fw-bold">{{userCorrects}}</h5>
                     {{/userCorrects}}
@@ -70,11 +75,12 @@
                     <h4>¡Iniciá una nueva partida!</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </article>
         </section>
     </div>
+
 </main>
 {{#showLostModal}}
     <script src="/public/js/lobbyLostModal.js"></script>
@@ -82,3 +88,11 @@
 {{#showReportModal}}
     <script src="/public/js/lobbyReportModal.js"></script>
 {{/showReportModal}}
+
+<script>
+document.getElementById('toggleTablaBtn').addEventListener('click', function() {
+  var tablaContainer = document.getElementById('tablaContainer');
+  tablaContainer.classList.toggle('tabla-expandida');
+  tablaContainer.classList.toggle('tabla-contraida');
+});
+</script>
