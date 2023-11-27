@@ -231,8 +231,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`Id`, `Nombre_completo`, `Fecha_nacimiento`, `Genero`, `idPais`, `lat`, `lng`, `Mail`, `Nombre_usuario`, `Foto_perfil`, `Id_rol`, `Hash`, `contrasenia_hash`, `Puntaje_max`, `nivel`, `cant_respondidas`, `cant_acertadas`, `Fecha_registro`) VALUES
 (12, 'Ana Nuñez', '1995-05-15', 'Femenino', 1, 0.00000000000000000000, 0.00000000000000000000, 'ananunez@gmail.com', 'Ana', NULL, 3, '7ce6b2286a5396e614b8484105d277e0', '81dc9bdb52d04dc20036dbd8313ed055', '9', 81, 16, 13, '2023-11-25'),
 (80, 'Matías Villalba', '1992-10-16', 'Masculino', 1, -34.69891451120487000000, -58.50764973161350500000, 'mattii2020@hotmail.com', 'Matute', 'mati.jpg', 3, 'c2dfb0b48d36edab65407c6a074a5170', '81dc9bdb52d04dc20036dbd8313ed055', '8', 78, 24, 18, '2023-11-25'),
-(82, 'Admin', '1998-09-01', 'No especificar', 1, -37.11248696198316600000, -56.85141338520986000000, 'admin@pregunton.com.ar', 'Admin', NULL, 1, '56de15ff97c9bce1b769fc2c783bc834', '81dc9bdb52d04dc20036dbd8313ed055', '0', 0, 0, 0, '2023-11-25'),
-(83, 'Editor', '1999-09-05', 'No especificar', 1, -32.95088252473996000000, -60.70188254502038000000, 'editor@pregunton.com.ar', 'Editor', NULL, 2, 'a1d59b3bbdcc7dd1e221ad60e7b65395', '81dc9bdb52d04dc20036dbd8313ed055', '0', 0, 0, 0, '2023-11-25'),
+(82, 'Admin', '1998-09-01', 'No especificar', 1, -37.11248696198316600000, -56.85141338520986000000, 'admin@gmail.com.ar', 'Admin', NULL, 1, '56de15ff97c9bce1b769fc2c783bc834', '81dc9bdb52d04dc20036dbd8313ed055', '0', 0, 0, 0, '2023-11-25'),
+(83, 'Editor', '1999-09-05', 'No especificar', 1, -32.95088252473996000000, -60.70188254502038000000, 'editor@gmail.com.ar', 'Editor', NULL, 2, 'a1d59b3bbdcc7dd1e221ad60e7b65395', '81dc9bdb52d04dc20036dbd8313ed055', '0', 0, 0, 0, '2023-11-25'),
 (94, 'Nina', '1985-08-09', 'No especificar', 4, 6.24880152730377700000, -75.56819753287763000000, 'norber_colombia@gmail.com', 'Nina', NULL, 3, '410c3a33ba6a196593f2871afd34d9b5', '81dc9bdb52d04dc20036dbd8313ed055', '2', 63, 8, 5, '2023-11-25');
 
 -- --------------------------------------------------------

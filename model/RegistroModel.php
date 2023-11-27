@@ -31,13 +31,13 @@ class RegistroModel
             $mail->Host = 'smtp.office365.com';
             $mail->SMTPAuth = true;
             $mail->AuthType = 'PLAIN';
-            $mail->Username = 'mattii2010@hotmail.com';
-            $mail->Password = 'kriegsmarine';
+            $mail->Username = 'pregunta2.ok@hotmail.com';
+            $mail->Password = 'Programacionweb';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
 
-            $mail->setFrom('mattii2010@hotmail.com', 'Pregunton');
+            $mail->setFrom('mattii2010@hotmail.com', 'Pregunta2');
             $mail->addAddress($email, $nameComplete);
             $mail->Subject = 'Valida tu cuenta para empezar a jugar!';
 
@@ -62,9 +62,11 @@ class RegistroModel
         $validateHash = md5($token);
 
         if ($this->validateUser($mail, $nameUser)) {
-            $query = "INSERT INTO usuario (Nombre_completo, Fecha_nacimiento, Genero, idPais, lat, lng, Mail, Nombre_usuario, Foto_perfil, Hash, contrasenia_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO usuario (Nombre_completo, Fecha_nacimiento, Genero, idPais, lat, lng, Mail, Nombre_usuario, Foto_perfil, Hash, contrasenia_hash, Id_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->database->prepare($query);
-            $stmt->bind_param("sssiddsssss", $nameComplete, $birth, $sex, $country, $lat, $lng, $mail, $nameUser, $photo, $validateHash, $passHash);
+
+            $defaultRolId = 3;
+            $stmt->bind_param("sssiddsssssi", $nameComplete, $birth, $sex, $country, $lat, $lng, $mail, $nameUser, $photo, $validateHash, $passHash, $defaultRolId);
             $stmt->execute();
             if ($stmt->affected_rows > 0) {
                 $ret = true;
